@@ -17,6 +17,7 @@
     owner: root
     group: root
     mode: '0750'
+  environment: "{{ proxy_env | default(omit) }}"
 
 - name: "Install Linux Client | Copy velociraptor client config"
   ansible.builtin.copy:
