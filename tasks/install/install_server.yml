@@ -40,7 +40,17 @@
        }, \"GUI\": {
           \"bind_address\": \"{{ velociraptor_gui_host }}\",
           \"bind_port\": {{ velociraptor_gui_port }},
-          \"use_plain_http\": {{ velociraptor_gui_use_plain_http | lower }}
+          \"use_plain_http\": {{ velociraptor_gui_use_plain_http | lower }},
+          \"public_url\": \"{{ velociraptor_gui_public_url }}\",
+          \"authenticator\": {
+             \"type\": \"{{ velociraptor_gui_auth_type }}\"{% if velociraptor_gui_auth_type == 'oidc' %},
+             \"oidc_issuer\": \"{{ velociraptor_gui_auth_oidc_issuer }}\",
+             \"oidc_name\": \"{{ velociraptor_gui_auth_oidc_name }}\",
+             \"avatar\": \"{{ velociraptor_gui_auth_avatar }}\",
+             \"oauth_client_id\": \"{{ velociraptor_gui_auth_oauth_client_id }}\",
+             \"oauth_client_secret\": \"{{ velociraptor_gui_auth_oauth_client_secret }}\"
+       {% endif %}
+          }
        }, \"Frontend\": {
           \"bind_address\": \"{{ velociraptor_frontend_host }}\",
           \"bind_port\": {{ velociraptor_frontend_port }},
