@@ -111,6 +111,10 @@ https://velociraptor.velocidex.com/velociraptor-network-communications-305686240
 
 * https://docs.velociraptor.app/docs/deployment/troubleshooting/
 
+## References
+
+* Custom certificate: [How to use your own certificates to secure your Velociraptor deployment](https://docs.velociraptor.app/blog/2024/2024-07-22-how-to-use-your-own-certificates/)
+
 ## License
 
 [MIT](LICENSE)
