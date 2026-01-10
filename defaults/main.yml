@@ -45,6 +45,10 @@ velociraptor_datastore_path: /var/tmp/velociraptor
 velociraptor_webproxy_host: ''
 velociraptor_webproxy_port: ''
 velociraptor_webproxy_ignore: ''
+# if want to use separate file (authenticated user?)
+velociraptor_webproxy_env_enable: false
+velociraptor_webproxy_env_file: /etc/environment
+velociraptor_webproxy_env_content: ''
 
 # using a reverse proxy?
 velociraptor_reverseproxy: false
