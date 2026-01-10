@@ -1,0 +1,80 @@
+---
+
+- name: Systemd
+  block:
+    - name: Debug
+      ansible.builtin.debug:
+        var: "{{ item }}"
+        verbosity: 1
+      loop:
+        - velociraptor_webproxy_env_enable
+        - velociraptor_webproxy_env_file
+        - velociraptor_webproxy_env_content
+    - name: Install unit - {{ unit_name }}
+      block:
+        - name: Ensure override folder exists
+          ansible.builtin.file:
+            path: "/etc/systemd/system/velociraptor.service.d"
+            state: directory
+            mode: '0755'
+            owner: root
+        - name: Configure override for velociraptor
+          ansible.builtin.copy:
+            content: |
+              [Service]
+              EnvironmentFile={{ velociraptor_webproxy_env_file }}
+            dest: "/etc/systemd/system/velociraptor.service.d/environment.conf"
+            mode: '0644'
+            owner: root
+          when:
+            - velociraptor_webproxy_env_enable | bool
+            - velociraptor_webproxy_env_file | length > 0
+            - velociraptor_webproxy_env_content | length == 0
+        - name: Environment file
+          when:
+            - velociraptor_webproxy_env_enable | bool
+            - velociraptor_webproxy_env_file | length > 0
+            - velociraptor_webproxy_env_content | length > 0
+          block:
+            - name: Set custom env file for velociraptor
+              ansible.builtin.copy:
+                content: "{{ velociraptor_webproxy_env_content }}"
+                dest: "{{ velociraptor_webproxy_env_file }}"
+                mode: '0640'
+                owner: root
+                group: root
+      rescue:
+        - name: Import immutable
+          ansible.builtin.import_tasks: immutable.yml
+          vars:
+            target_dir: /etc/systemd/system
+            state: pre
+        - name: Import immutable
+          ansible.builtin.import_tasks: immutable.yml
+          vars:
+            target_dir: "/etc/systemd/system/{{ unit_name }}.service.d/environment.conf"
+            state: pre
+        - name: Ensure override folder exists (immutable)
+          ansible.builtin.file:
+            path: "/etc/systemd/system/velociraptor.service.d"
+            state: directory
+            mode: '0755'
+            owner: root
+        - name: Configure override for velociraptor (immutable)
+          ansible.builtin.copy:
+            content: |
+              [Service]
+              EnvironmentFile={{ velociraptor_webproxy_env_file }}
+            dest: "/etc/systemd/system/velociraptor.service.d/environment.conf"
+            mode: '0644'
+            owner: root
+        - name: Import immutable
+          ansible.builtin.import_tasks: immutable.yml
+          vars:
+            target_dir: /etc/systemd/system
+            state: post
+        - name: Import immutable
+          ansible.builtin.import_tasks: immutable.yml
+          vars:
+            target_dir: "/etc/systemd/system/{{ unit_name }}.service.d/environment.conf"
+            state: post

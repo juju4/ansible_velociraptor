@@ -113,6 +113,14 @@
     name: pexpect
   environment: "{{ proxy_env | default(omit) }}"
 
+- name: Import install_server-proxy
+  ansible.builtin.import_tasks: install/install_server-proxy.yml
+  vars:
+    unit_name: velociraptor
+  when:
+    - ansible_facts['service_mgr'] == 'systemd'
+    - velociraptor_webproxy_env_enable | bool
+
 - name: "Install Server | Add Admin User to WebGui"
   ansible.builtin.expect:
     command: "/opt/velociraptor/velociraptor --config /etc/velociraptor/server.config.yaml user add {{ velociraptor_admin_user }} --role=administrator"
