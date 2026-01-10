@@ -113,6 +113,10 @@ https://velociraptor.velocidex.com/velociraptor-network-communications-305686240
 
 ## References
 
+* Create user in cli: `velociraptor --config server.config.yaml user add --role administrator bob@local`, `velociraptor --config server.config.yaml user add --role reader fred@local`
+
+* SSO: <https://docs.velociraptor.app/knowledge_base/tips/setup_keycloak/>
+
 * Custom certificate: [How to use your own certificates to secure your Velociraptor deployment](https://docs.velociraptor.app/blog/2024/2024-07-22-how-to-use-your-own-certificates/)
 
 ## License
