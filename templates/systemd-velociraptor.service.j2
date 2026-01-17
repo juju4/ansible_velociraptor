@@ -5,7 +5,9 @@ After=network.target
 
 [Service]
 Type=simple
-{% if velociraptor_webproxy_host|string and velociraptor_webproxy_port|string %}
+{% if velociraptor_webproxy_env_enable | bool %}
+EnvironmentFile={{ velociraptor_webproxy_env_file }}
+{% elif velociraptor_webproxy_host | length > 0 and velociraptor_webproxy_port | length > 0 %}
 Environment=HTTP_PROXY={{ velociraptor_webproxy_host }}:{{ velociraptor_webproxy_port }}
 Environment=HTTPS_PROXY={{ velociraptor_webproxy_host }}:{{ velociraptor_webproxy_port }}
 Environment=NO_PROXY={{ velociraptor_webproxy_ignore }}
