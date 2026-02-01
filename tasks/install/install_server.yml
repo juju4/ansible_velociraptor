@@ -97,12 +97,12 @@
   ansible.builtin.apt:
     update_cache: true
     cache_valid_time: "{{ velociraptor_apt_cache_valid_time | default(3600) }}"
-  when: ansible_os_family == "Debian"
+  when: ansible_facts['os_family'] == "Debian"
 
 - name: "Install Server | Update Yum Cache"
   ansible.builtin.dnf:
     update_cache: true
-  when: ansible_os_family == "RedHat"
+  when: ansible_facts['os_family'] == "RedHat"
 
 - name: "Install Server | Install pip3"
   ansible.builtin.package:

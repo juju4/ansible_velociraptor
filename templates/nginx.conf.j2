@@ -16,8 +16,8 @@ server {
     include /etc/nginx/harden-nginx-https;
 
 {% if hardenwebserver_cert is defined and (hardenwebserver_cert == 'selfsigned' or hardenwebserver_cert == 'mkcert' or hardenwebserver_cert == 'stepca') %}
-    ssl_certificate {{ hardenwebserver_ssl_cert | default(ssl_dir + "/" + ansible_fqdn + ".crt") }};
-    ssl_certificate_key {{ hardenwebserver_ssl_key | default(ssl_privatedir + "/" + ansible_fqdn + ".key") }};
+    ssl_certificate {{ hardenwebserver_ssl_cert | default(ssl_dir + "/" + ansible_facts.fqdn + ".crt") }};
+    ssl_certificate_key {{ hardenwebserver_ssl_key | default(ssl_privatedir + "/" + ansible_facts.fqdn + ".key") }};
 {% else %}
     ssl_certificate {{ hardenwebserver_ssl_cert | default(ssl_fullchain) }};
     ssl_certificate_key {{ hardenwebserver_ssl_key | default(ssl_privkey) }};

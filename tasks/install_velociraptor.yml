@@ -10,8 +10,8 @@
   ansible.builtin.import_tasks: install/install_linux_client.yml
   when:
     - velociraptor_client|bool
-    - ansible_os_family != "Windows"
-    - ansible_os_family != "Darwin"
+    - ansible_facts['os_family'] != "Windows"
+    - ansible_facts['os_family'] != "Darwin"
   tags:
     - install
 
@@ -19,7 +19,7 @@
   ansible.builtin.import_tasks: install/install_mac_client.yml
   when:
     - velociraptor_client|bool
-    - ansible_os_family == "Darwin"
+    - ansible_facts['os_family'] == "Darwin"
   tags:
     - install
 
@@ -27,6 +27,6 @@
   ansible.builtin.import_tasks: install/install_windows_client.yml
   when:
     - velociraptor_client|bool
-    - ansible_os_family == "Windows"
+    - ansible_facts['os_family'] == "Windows"
   tags:
     - install
