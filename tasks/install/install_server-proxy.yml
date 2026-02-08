@@ -5,7 +5,7 @@
     - name: Debug
       ansible.builtin.debug:
         var: "{{ item }}"
-        verbosity: 1
+        verbosity: 2
       loop:
         - velociraptor_webproxy_env_enable
         - velociraptor_webproxy_env_file

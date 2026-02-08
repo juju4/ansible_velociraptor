@@ -11,7 +11,7 @@ velociraptor_use_musl: false
 velociraptor_musl_url: "https://github.com/Velocidex/velociraptor/releases/download/{{ velociraptor_version_topdir | default(velociraptor_version) }}/velociraptor-{{ velociraptor_version_patch | default(velociraptor_version) }}-linux-amd64-musl"
 velociraptor_admin_user: admin
 velociraptor_admin_password: "{{ vault_velociraptor_admin_password }}"
-velociraptor_host: "{{ ansible_default_ipv4.address }}"
+velociraptor_host: "{{ ansible_facts.default_ipv4.address }}"
 velociraptor_port: 8000
 velociraptor_selfsigned_ssl: true
 velociraptor_gui_use_plain_http: false
