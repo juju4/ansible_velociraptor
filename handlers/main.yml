@@ -10,7 +10,7 @@
 
 - name: URL
   ansible.builtin.debug:
-    msg: "You can reach Velociraptor via https://{{ ansible_default_ipv4.address }}:8889/"
+    msg: "You can reach Velociraptor via https://{{ ansible_facts['default_ipv4'].address }}:8889/"
 
 - name: Restart velociraptor nix client
   ansible.builtin.systemd:

@@ -11,8 +11,8 @@
   ansible.builtin.import_tasks: uninstall/uninstall_linux_client.yml
   when:
     - velociraptor_client|bool
-    - ansible_os_family != "Windows"
-    - ansible_os_family != "Darwin"
+    - ansible_facts['os_family'] != "Windows"
+    - ansible_facts['os_family'] != "Darwin"
   tags:
     - never
     - uninstall_client
@@ -21,7 +21,7 @@
   ansible.builtin.import_tasks: uninstall/uninstall_mac_client.yml
   when:
     - velociraptor_client|bool
-    - ansible_os_family == "Darwin"
+    - ansible_facts['os_family'] == "Darwin"
   tags:
     - never
     - uninstall_client
@@ -30,7 +30,7 @@
   ansible.builtin.import_tasks: uninstall/uninstall_windows_client.yml
   when:
     - velociraptor_client|bool
-    - ansible_os_family == "Windows"
+    - ansible_facts['os_family'] == "Windows"
   tags:
     - never
     - uninstall_client
