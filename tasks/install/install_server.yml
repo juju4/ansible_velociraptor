@@ -111,6 +111,12 @@
 - name: "Import python-externally-managed"
   ansible.builtin.import_tasks: python-externally-managed.yml
 
+- name: "Install Server | Redhat | Install python3-packaging"
+  ansible.builtin.package:
+    name: python3-packaging
+    state: present
+  when: ansible_facts['os_family'] == "RedHat"
+
 - name: "Install Server | PIP Install pexpect"
   ansible.builtin.pip:
     name: pexpect
