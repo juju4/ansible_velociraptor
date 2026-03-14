@@ -1,11 +1,15 @@
 # ansible-velociraptor
+
+[![Actions Status - Main](https://github.com/juju4/ansible_velociraptor/workflows/AnsibleCI/badge.svg)](https://github.com/juju4/ansible_velociraptor/actions?query=branch%3Amain)
+[![Actions Status - Devel](https://github.com/juju4/ansible_velociraptor/workflows/AnsibleCI/badge.svg?branch=devel)](https://github.com/juju4/ansible_velociraptor/actions?query=branch%3Adevel)
+
 Ansible role for Installation and Configuration of [Velocidex Velociraptor](https://github.com/Velocidex/velociraptor)
 
 ## OS Platforms
 
 This role has been tested on the following operating systems:
 
-- Ubuntu 18.04, 20.04 (server,client)
+- Ubuntu 24.04, 22.04 (server,client)
 - Red Hat Enterprise Linux 7, 8 (client)
 - Windows 10 (client)
 - MacOSX Intel & M1 (client)
@@ -118,6 +122,12 @@ https://velociraptor.velocidex.com/velociraptor-network-communications-305686240
 * SSO: <https://docs.velociraptor.app/knowledge_base/tips/setup_keycloak/>
 
 * Custom certificate: [How to use your own certificates to secure your Velociraptor deployment](https://docs.velociraptor.app/blog/2024/2024-07-22-how-to-use-your-own-certificates/)
+
+## Contributors thanks!
+
+* [PrymalInstynct](https://github.com/PrymalInstynct) - Writer of the initial role
+* [juju4](https://github.com/juju4)
+* [CptOfEvilMinions](https://github.com/CptOfEvilMinions)
 
 ## License
 
