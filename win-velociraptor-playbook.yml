@@ -2,4 +2,4 @@
 - name: Windows velociraptor playbook
   hosts: all
   roles:
-    - prymalinstynct.velociraptor
+    - juju4.velociraptor
