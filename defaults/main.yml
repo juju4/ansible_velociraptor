@@ -2,11 +2,12 @@
 
 velociraptor_client: false
 velociraptor_server: false
-velociraptor_version: "v0.73"
 # only if patch version and difference in versions used in download url
 # leave undefined or empty else
-velociraptor_version_topdir: v0.76
-velociraptor_version_patch: v0.76.5
+# renovate: datasource=github-tags depName=Velocidex/velociraptor
+velociraptor_github_version: v0.76.5
+velociraptor_version_topdir: "{{ velociraptor_github_version | regex_replace('^v([0-9]+\\.[0-9]+)', 'v\\1') }}"
+velociraptor_version_patch: "{{ velociraptor_github_version }}"
 velociraptor_use_musl: false
 velociraptor_musl_url: "https://github.com/Velocidex/velociraptor/releases/download/{{ velociraptor_version_topdir | default(velociraptor_version) }}/velociraptor-{{ velociraptor_version_patch | default(velociraptor_version) }}-linux-amd64-musl"
 velociraptor_admin_user: admin
