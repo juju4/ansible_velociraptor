@@ -29,6 +29,11 @@
   notify:
     - Restart velociraptor nix client
 
+- name: "Install Linux Client | Ensure systemd is present"
+  ansible.builtin.package:
+    name: systemd
+    state: present
+
 - name: Systemd
   block:
     - name: "Install Linux Client | Install velociraptor systemd configuration"
