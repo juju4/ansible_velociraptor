@@ -29,13 +29,55 @@
   notify:
     - Restart velociraptor nix client
 
-- name: "Install Linux Client | Install velociraptor systemd configuration"
-  ansible.builtin.template:
-    src: systemd-velociraptor-client.service.j2
-    dest: /lib/systemd/system/velociraptor-client.service
-    owner: root
-    group: root
-    mode: '0644'
-  register: systemd
-  notify:
-    - Restart velociraptor nix client
+- name: Systemd
+  block:
+    - name: "Install Linux Client | Install velociraptor systemd configuration"
+      ansible.builtin.template:
+        src: systemd-velociraptor-client.service.j2
+        dest: /lib/systemd/system/velociraptor-client.service
+        owner: root
+        group: root
+        mode: '0644'
+      register: systemd
+      notify:
+        - Restart velociraptor nix client
+    - name: Enable velociraptor nix client
+      ansible.builtin.systemd:
+        name: velociraptor-client
+        enabled: true
+  rescue:
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: /lib/systemd/system
+        state: pre
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: /lib/systemd/system/velociraptor-client.service
+        state: pre
+    - name: "Install Linux Client | Install velociraptor systemd configuration (immutable)"
+      ansible.builtin.template:
+        src: systemd-velociraptor-client.service.j2
+        dest: /lib/systemd/system/velociraptor-client.service
+        owner: root
+        group: root
+        mode: '0644'
+      register: systemd
+      notify:
+        - Reload systemd
+        - Restart velociraptor nix client
+    - name: Enable velociraptor nix client (immutable)
+      ansible.builtin.systemd:
+        name: velociraptor-client
+        enabled: true
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: /lib/systemd/system
+        state: post
+    - name: Import immutable
+      ansible.builtin.import_tasks: immutable.yml
+      vars:
+        target_dir: /lib/systemd/system/velociraptor-client.service
+        state: post

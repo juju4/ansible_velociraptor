@@ -68,6 +68,9 @@
             dest: "/etc/systemd/system/velociraptor.service.d/environment.conf"
             mode: '0644'
             owner: root
+          notify:
+            - Reload systemd
+            - Restart velociraptor-server
         - name: Import immutable
           ansible.builtin.import_tasks: immutable.yml
           vars:
