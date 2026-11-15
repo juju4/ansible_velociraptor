@@ -20,12 +20,12 @@ repos:
       # - id: detect-aws-credentials
       - id: check-docstring-first
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.4.2
+    rev: v2.4.3
     hooks:
       - id: codespell
         args: [-I, .codespellignore]
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.16.3
+    rev: v4.19.2
     hooks:
       - id: commitizen
         stages: [commit-msg]
@@ -36,11 +36,11 @@ repos:
         args: ["--baseline", ".secrets.baseline"]
         # exclude: .*/tests/.*
   - repo: https://github.com/aristanetworks/j2lint.git
-    rev: v1.2.0
+    rev: v1.3.0
     hooks:
       - id: j2lint
   - repo: https://github.com/jackdewinter/pymarkdown
-    rev: v0.9.38
+    rev: v0.9.41
     hooks:
       - id: pymarkdown
         args:
@@ -48,7 +48,7 @@ repos:
           - MD013
           - scan
   - repo: https://github.com/renovatebot/pre-commit-hooks
-    rev: 43.227.0
+    rev: 44.132.2
     hooks:
       - id: renovate-config-validator
         args: [--strict]
@@ -77,7 +77,7 @@ repos:
         entry: perl -pi* -e 's/\xe2\x80\x93/-/g && ($t = 1) && print STDERR $_; END{{exit $t}}'
         files: ""
   - repo: https://github.com/ansible-community/ansible-lint.git
-    rev: v26.4.0
+    rev: v26.10.1
     hooks:
       - id: ansible-lint
         files: \.(yaml|yml)$
