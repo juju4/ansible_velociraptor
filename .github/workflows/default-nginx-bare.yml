@@ -47,6 +47,7 @@ jobs:
         with:
           egress-policy: block
           allowed-endpoints: >
+            archive.ubuntu.com:443
             azure.archive.ubuntu.com:80
             dl.google.com:443
             esm.ubuntu.com:443
@@ -56,6 +57,8 @@ jobs:
             packages.microsoft.com:443
             pypi.org:443
             release-assets.githubusercontent.com:443
+            security.ubuntu.com:443
+            us-east-2.ec2.archive.ubuntu.com:443
             www.google.com:1025
       - name: Checkout code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
